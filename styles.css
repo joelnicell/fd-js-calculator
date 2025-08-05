@@ -13,29 +13,41 @@ section {
 }
 
 #calculator {
-    width: 480px;
     border: 1px solid black;
     padding: 8px;
-    border-radius: 4px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
 }
 
-#numbers {
+#buttons {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    border: 1px solid grey;
-    width: fit-content;
+    width: 240px;
+    height: 240px;
+
 }
 
 button {
     all: unset;
 }
 
-.number-button {
+.calc-btn {
     /* these values are hard coded, but could maybe change for responsive design */
-    height: 48px;
-    width: 48px;
+    grid-column: span 1;
+    grid-row: span 1;
     border-radius: 6px;
     border: 1px solid grey;
     text-align: center;
+}
+
+#zero-btn {
+    grid-column: span 2;
+}
+
+#calc-display {
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 16px;
 }
