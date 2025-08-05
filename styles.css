@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+section {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#calculator {
+    width: 480px;
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+#numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    border: 1px solid grey;
+    width: fit-content;
+}
+
+button {
+    all: unset;
+}
+
+.number-button {
+    /* these values are hard coded, but could maybe change for responsive design */
+    height: 48px;
+    width: 48px;
+    border-radius: 6px;
+    border: 1px solid grey;
+    text-align: center;
+}
