@@ -3,6 +3,12 @@ let firstNum = "null;
 let currentOp = null;
 let waitingForSecondNum = false;
 
+const display = document.querySelector("#display");
+
+function updateDisplay();
+  display.value = displayValue;
+}
+
 function inputDigit(digit) {
   if (waitingForSecondNum) {
     displayValue = digit;
@@ -24,7 +30,7 @@ function inputDecimal () {
 if(!displayValue.includes(".")) {
   displayValue += ".";
   updateDisplay ();
-}
+  }
 }
 
 function backspace() {
