@@ -3,7 +3,7 @@
     --color-primary: rgb(40, 40, 40);
     --btn-size: 75px;
 
-    background-color: rgb(234, 230, 230);
+    background-color: rgb(240, 240, 240);
     color: var(--color-primary);
 }
 
@@ -23,7 +23,7 @@ section {
 
 #calculator {
     border: 1px solid var(--color-primary);
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(251, 251, 251);
     padding: 8px;
     border-radius: 8px;
     box-shadow: 0 10px 15px rgba(0,0,0,0.2);
@@ -35,7 +35,6 @@ section {
     gap: 8px;
     width: calc(var(--btn-size)*4);
     height: calc(var(--btn-size)*4);
-
 }
 
 button {
