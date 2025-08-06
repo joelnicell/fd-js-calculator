@@ -71,27 +71,30 @@ function processOp(nextOp) {
 
 function handleEquals()  {
   const inputValue = parseFloat(displayValue);
-if (currentOp && firstNum !== null) {
-  const result = operate(currentOp, firstNum, inputValue);
-  if(typeof result === "string") {
-    displayValue = result;
-    resetState();
-    updateDisplay();
-    return;
-  }
 
-  displayValue = formatResult(result);
-  firstNum = result;
-  currentOp = null;
-  waitingForSecondNum = false;
-  updateDisplay();
+  if (currentOp && firstNum !== null) {
+    const result = operate(currentOp, firstNum, inputValue);
+
+    if(typeof result === "string") {
+      displayValue = result;
+      resetState();
+      updateDisplay();
+      return;
+    }
+
+    displayValue = formatResult(result);
+    firstNum = result;
+    currentOp = null;
+    waitingForSecondNum = false;
+    updateDisplay();
   }
 }
-  function clearCalculator() {
-    resetState();
-    displayValue = "";
-    updateDisplay();
-  }
+
+function clearCalculator() {
+  resetState();
+  displayValue = "";
+  updateDisplay();
+}
 
 function resetState() {
   firstNum = null;
@@ -117,11 +120,12 @@ function multiply(a, b) {
   return a * b;
 }  
 
- function divide(a, b) {
-   if (b === 0) {
-     return "Genius alert!";
-   }
-   return a/ b;
+function divide(a, b) {
+  if (b === 0) {
+    // todo: safely return a value we can use for error handling. e.g. NaN or null
+    return "Genius alert!";
+  }
+  return a/ b;
  }
 
 function operate(currentOp, a, b) {
@@ -137,6 +141,7 @@ function operate(currentOp, a, b) {
 // ==== Keyboard ====
 document.addEventListener("keydown", (event) => {
 const key = event.key;
+
 if (!isNaN(key)) {
   inputDigit(key);
 } else if (["+", "-", "*", "/"].includes(key)) {
