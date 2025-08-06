@@ -1,13 +1,16 @@
 let displayValue = "";
-let firstNum = "null;
+let firstNum = null;
 let currentOp = null;
 let waitingForSecondNum = false;
 
-const display = document.querySelector("#display");
+// ===== HTML Elements =====
+const display = document.querySelector("#calc-display");
+const ac = document.querySelector("#ac-btn");
 
-function updateDisplay();
-  display.value = displayValue;
-}
+// ===== Functions =====
+function updateDisplay() {
+  display.textContent = displayValue;
+};
 
 function inputDigit(digit) {
   if (waitingForSecondNum) {
@@ -16,7 +19,7 @@ function inputDigit(digit) {
   } else {
     displayValue += digit;
   }
-  updateDisplay += digit;
+  updateDisplay()
 }
 
 function inputDecimal () {
@@ -24,14 +27,13 @@ function inputDecimal () {
   waitingForSecondNum = false;
   updateDisplay ();
   return;
-
 }
 
-if(!displayValue.includes(".")) {
-  displayValue += ".";
-  updateDisplay ();
-  }
-}
+// unsure why this is here?
+// if(!displayValue.includes(".")) {
+//   displayValue += ".";
+//   updateDisplay ();
+// }
 
 function backspace() {
   if(waitingForSecondNum || displayValue === "Error") return;
@@ -69,7 +71,6 @@ function processOp(nextOp) {
 
 function handleEquals()  {
   const inputValue = parseFloat(displayValue);
-
 if (currentOp && firstNum !== null) {
   const result = operate(currentOp, firstNum, inputValue);
   if(typeof result === "string") {
@@ -96,10 +97,6 @@ function resetState() {
   firstNum = null;
   currentOp = null;
   waitingForSecondNum = false;
-}
-
-function updateDisplay() {
-  document.getElementById("display").value = displayValue;
 }
 
 function formatResult(result) {
@@ -137,12 +134,12 @@ function operate(currentOp, a, b) {
   }
 }
 
-// ==== Keyboard====
+// ==== Keyboard ====
 document.addEventListener("keydown", (event) => {
 const key = event.key;
-if (!isNaN(Key)) {
+if (!isNaN(key)) {
   inputDigit(key);
-} else if (["+", "-", "*", "/"].includes.(key)) {
+} else if (["+", "-", "*", "/"].includes(key)) {
   processOp(key);
 } else if (key === ".") {
   inputDecimal();
@@ -155,7 +152,5 @@ if (!isNaN(Key)) {
   clearCalculator();
 }
 });  
-  
-  
 
-     
+ac.addEventListener("click", () => resetState());
