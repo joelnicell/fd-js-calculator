@@ -144,6 +144,8 @@ buttons.addEventListener("click", (event) => {
 
   if (button.id === "ac-btn") {
     clearCalculator();
+  } else if (button.id === "backspace-btn") {
+    backspace();
   } else if (button.id === "equals-btn") {
     handleEquals();
   } else if (["+", "-", "*", "/"].includes(buttonText)) {
