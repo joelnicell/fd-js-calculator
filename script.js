@@ -140,7 +140,7 @@ function operate(currentOp, a, b) {
 // ==== Event Listener for Buttons ====
 buttons.addEventListener("click", (event) => {
   const button = event.target;
-  const buttonText = button textContent;
+  const buttonText = button.textContent;
 
   if (button.id === "ac-btn") {
     clearCalculator();
