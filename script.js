@@ -35,6 +35,17 @@ function backspace() {
   updateDisplay();
 }
 
+function calculatePercentage() {
+  const value = parseFloat(displayValue);
+  displayValue = (value / 100).toString();
+  updateDisplay();
+  waitingForSecondNum = true;
+}
+
+function toggleSign() {
+  displayValue = (parseFloat(displayValue) * -1).toString();
+  updateDisplay();
+}
 function processOp(nextOp) {
   const inputValue = parseFloat(displayValue);
 
@@ -150,6 +161,10 @@ buttons.addEventListener("click", (event) => {
     handleEquals();
   } else if (["+", "-", "*", "/"].includes(buttonText)) {
     processOp(buttonText);
+  } else if (button.id === "mod-btn") {
+    calculatePercentage();
+  } else if (button.id === "sign-btn") {
+    toggleSign();
   } else if (button.id === "decimal-btn") {
     inputDecimal();
   } else if (!isNaN(buttonText) && buttonText.trim() !== "") {
@@ -165,6 +180,8 @@ if (!isNaN(key)) {
   inputDigit(key);
 } else if (["+", "-", "*", "/"].includes(key)) {
   processOp(key);
+} else if (key === "%") {
+  calculatePercentage();
 } else if (key === ".") {
   inputDecimal();
 } else if (key === "Enter" || key === "=") {
