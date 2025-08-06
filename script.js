@@ -1,4 +1,4 @@
-let displayValue = "";
+let displayValue = "0";
 let firstNum = null;
 let currentOp = null;
 let waitingForSecondNum = false;
@@ -17,27 +17,21 @@ function inputDigit(digit) {
     displayValue = digit;
     waitingForSecondNum = false;
   } else {
-    displayValue += digit;
+    displayValue = displayValue === "0"? digit : displayValue + digit
   }
-  updateDisplay()
-}
+  updateDisplay();
+}  
 
 function inputDecimal () {
-  displayValue = "0.";
-  waitingForSecondNum = false;
+ if (!displayValue.includes(".")) {
+  displayValue += ".";
+ } 
   updateDisplay ();
-  return;
 }
-
-// unsure why this is here?
-// if(!displayValue.includes(".")) {
-//   displayValue += ".";
-//   updateDisplay ();
-// }
 
 function backspace() {
   if(waitingForSecondNum || displayValue === "Error") return;
-  displayValue = displayValue.slice(0, -1);
+  displayValue = displayValue.slice(0, -1) || "0";
   updateDisplay();
 }
 
@@ -92,7 +86,7 @@ function handleEquals()  {
 
 function clearCalculator() {
   resetState();
-  displayValue = "";
+  displayValue = "0";
   updateDisplay();
 }
 
@@ -130,13 +124,36 @@ function divide(a, b) {
 
 function operate(currentOp, a, b) {
   switch (currentOp) {
-    case "+": return add(a, b);
-    case "-": return subtract(a, b);
-    case "*": return multiply(a, b);
-    case "/": return divide(a, b);
-    default:  return "Error";
+    case "+": 
+      return add(a, b);
+    case "-": 
+      return subtract(a, b);
+    case "*": 
+      return multiply(a, b);
+    case "/": 
+      return divide(a, b);
+    default:  
+      return "Error";
   }
 }
+
+// ==== Event Listener for Buttons ====
+buttons.addEventListener("click", (event) => {
+  const button = event.target;
+  const buttonText = button textContent;
+
+  if (button.id === "ac-btn") {
+    clearCalculator();
+  } else if (button.id === "equals-btn") {
+    handleEquals();
+  } else if (["+", "-", "*", "/"].includes(buttonText)) {
+    processOp(buttonText);
+  } else if (button.id === "decimal-btn") {
+    inputDecimal();
+  } else if (!isNaN(buttonText) && buttonText.trim() !== "") {
+    inputDigit(buttonText);
+  }
+}); 
 
 // ==== Keyboard ====
 document.addEventListener("keydown", (event) => {
