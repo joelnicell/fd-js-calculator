@@ -5,9 +5,9 @@ let waitingForSecondNum = false;
 
 // ===== HTML Elements =====
 const display = document.querySelector("#calc-display");
-const ac = document.querySelector("#ac-btn");
+const buttons = document.querySelectorAll("button");
 
-// ===== Functions =====
+// ===== Handle Calculator =====
 function updateDisplay() {
   display.textContent = displayValue;
 };
@@ -46,11 +46,12 @@ function toggleSign() {
   displayValue = (parseFloat(displayValue) * -1).toString();
   updateDisplay();
 }
+
 function processOp(nextOp) {
   const inputValue = parseFloat(displayValue);
 
   if (currentOp && waitingForSecondNum) {
-      currentOp = nextOp;
+    currentOp = nextOp;
     return;
   }
 
@@ -58,13 +59,14 @@ function processOp(nextOp) {
     firstNum = inputValue;
   } else if (currentOp) {
     const result = operate(currentOp, firstNum, inputValue);
-    if (typeof result === "string") {
-       displayValue = result;
-      resetState();
-      updateDisplay();
-      return;
 
+    if (result === null) {
+      handleDivideByZero();
+      resetState();
+      // updateDisplay();
+      return;
     }
+
     firstNum = result;
     displayValue = formatResult(result);
     updateDisplay();
@@ -74,23 +76,25 @@ function processOp(nextOp) {
   waitingForSecondNum = true;
 } 
 
+function handleDivideByZero() {
+  // If the calc gives null result, we can do what we want in a separate function.
+  alert("Genius Alert!");
+}
+
 function handleEquals()  {
   const inputValue = parseFloat(displayValue);
 
-  if (currentOp && firstNum !== null) {
+  if (currentOp !== null && firstNum !== null && waitingForSecondNum === false) {
     const result = operate(currentOp, firstNum, inputValue);
 
-    if(typeof result === "string") {
-      displayValue = result;
-      resetState();
-      updateDisplay();
-      return;
+    // divide by zero case
+    if(result === null) {
+      handleDivideByZero();
+    } else {
+      displayValue = formatResult(result);
     }
 
-    displayValue = formatResult(result);
-    firstNum = result;
-    currentOp = null;
-    waitingForSecondNum = false;
+    resetState();
     updateDisplay();
   }
 }
@@ -108,10 +112,11 @@ function resetState() {
 }
 
 function formatResult(result) {
-  if (typeof result === "string") return result;
-  const rounded = parseFloat(result.toFixed(4));
-  return rounded.toString();
+  // toFixed rounds the number, so we don't need to convert to num then to string.
+  return result.toFixed(4);
 }
+
+// ===== Operations =====
 
 function add(a, b) {
   return a + b;
@@ -127,8 +132,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   if (b === 0) {
-    // todo: safely return a value we can use for error handling. e.g. NaN or null
-    return "Genius alert!";
+    return null;
   }
   return a/ b;
  }
@@ -149,7 +153,7 @@ function operate(currentOp, a, b) {
 }
 
 // ==== Event Listener for Buttons ====
-buttons.addEventListener("click", (event) => {
+buttons.forEach((b) => b.addEventListener("click", (event) => {
   const button = event.target;
   const buttonText = button.textContent;
 
@@ -170,7 +174,7 @@ buttons.addEventListener("click", (event) => {
   } else if (!isNaN(buttonText) && buttonText.trim() !== "") {
     inputDigit(buttonText);
   }
-}); 
+})); 
 
 // ==== Keyboard ====
 document.addEventListener("keydown", (event) => {
@@ -192,6 +196,5 @@ if (!isNaN(key)) {
 } else if (key.toLowerCase() === "c") {
   clearCalculator();
 }
-});  
+});
 
-ac.addEventListener("click", () => resetState());
