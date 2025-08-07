@@ -2,6 +2,7 @@ let displayValue = "0";
 let firstNum = null;
 let currentOp = null;
 let waitingForSecondNum = false;
+let newEquation = true;
 
 // ===== HTML Elements =====
 const display = document.querySelector("#calc-display");
@@ -13,11 +14,18 @@ function updateDisplay() {
 };
 
 function inputDigit(digit) {
+
   if (waitingForSecondNum) {
+    // starting a second number
     displayValue = digit;
     waitingForSecondNum = false;
+  } else if (newEquation === true) {
+    // if we're starting a new equation:
+    displayValue = digit;
+    newEquation = false;
   } else {
-    displayValue = displayValue === "0"? digit : displayValue + digit
+    // otherwise append to current display
+    displayValue += digit;
   }
   updateDisplay();
 }  
@@ -26,7 +34,7 @@ function inputDecimal () {
  if (!displayValue.includes(".")) {
   displayValue += ".";
  } 
-  updateDisplay ();
+  updateDisplay();
 }
 
 function backspace() {
@@ -80,7 +88,7 @@ function processOp(nextOp) {
 
 function handleDivideByZero() {
   // If the calc gives null result, we can do what we want in a separate function.
-  alert("Genius Alert!");
+  alert("Genius Alert! ;)");
 }
 
 function handleEquals()  {
@@ -98,6 +106,7 @@ function handleEquals()  {
 
     resetState();
     updateDisplay();
+    newEquation = true;
   }
 }
 
@@ -115,7 +124,9 @@ function resetState() {
 
 function formatResult(result) {
   // toFixed rounds the number, so we don't need to convert to num then to string.
-  return result.toFixed(4);
+  const rounded = parseFloat(result.toFixed(4));
+  return rounded.toString();
+  // return parseFloat(result).toFixed(4);
 }
 
 // ===== Operations =====
