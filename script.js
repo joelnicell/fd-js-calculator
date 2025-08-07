@@ -35,12 +35,14 @@ function backspace() {
   updateDisplay();
 }
 
-function calculatePercentage() {
-  const value = parseFloat(displayValue);
-  displayValue = (value / 100).toString();
-  updateDisplay();
-  waitingForSecondNum = true;
-}
+// not using mod function in the end
+
+// function calculatePercentage() {
+//   const value = parseFloat(displayValue);
+//   displayValue = (value / 100).toString();
+//   updateDisplay();
+//   waitingForSecondNum = true;
+// }
 
 function toggleSign() {
   displayValue = (parseFloat(displayValue) * -1).toString();
