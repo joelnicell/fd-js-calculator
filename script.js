@@ -8,6 +8,18 @@ let newEquation = true;
 const display = document.querySelector("#calc-display");
 const buttons = document.querySelectorAll("button");
 
+const themeToggleBtn = document.getElementById('toggle-theme-btn');
+
+themeToggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('night-mode');
+
+  if (document.body.classList.contains('night-mode')) {
+    themeToggleBtn.textContent = '🌞 Light Mode';
+  } else {
+    themeToggleBtn.textContent = '🌙 Dark Mode';
+  }
+});
+
 // ===== Handle Calculator =====
 function updateDisplay() {
   display.textContent = displayValue;
@@ -113,6 +125,7 @@ function handleEquals()  {
 function clearCalculator() {
   resetState();
   displayValue = "0";
+  newEquation = true;
   updateDisplay();
 }
 
