@@ -94,14 +94,14 @@ body.night-mode #equals-btn:active {
 body.night-mode {
   background: linear-gradient(
     -45deg,
-    #1a1a2e,
-    #16213e,
-    #0f3460,
-    #1a1a2e,
-    #2c3e50,
-    #34495e,
-    #22313f,
-    #3b3b58
+    #6a6a97,
+    #5f77ba,
+    #2d62a3,
+    #8787d6,
+    #6885a1,
+    #4c6884,
+    #5b748b,
+    #9292be
   );
   background-size: 400% 400%;
   animation: gradientNight 50s ease infinite;
@@ -130,7 +130,7 @@ section {
 
 #calculator {
   border: 2px solid var(--color-primary);
-    background-color: #b0c6d6;
+  background-color: #859ab1;
   padding: 8px;
   border-radius: 20px;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
@@ -148,13 +148,23 @@ button {
   all: unset;
 }
 
+button:hover {
+  filter: brightness(110%);
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .calc-btn {
   grid-column: span 1;
   grid-row: span 1;
   border-radius: 50px;
   border: 1px solid grey;
   text-align: center;
-    background: #c3cfd9;
+  background: #c3cfd9;
 }
 
 .calc-btn:active,
@@ -192,7 +202,7 @@ button {
 #multiple-btn,
 #minus-btn,
 #plus-btn {
-    background: #9fa0a1;
+  background: #9fa0a1;
 }
 
 #equals-btn {
@@ -236,6 +246,81 @@ footer {
   font-size: 1rem;
 }
 
+.small-footer {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
 body.night-mode #calc-display {
   color: var(--color-primary);
 }
+
+
+#toggle-theme-btn {
+  background: #425a90;
+  background: linear-gradient(to right, #182848, #4b6cb7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#toggle-theme-btn:hover {
+  background: linear-gradient(to right, #1d2b64, #5a6cbf);
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+#toggle-theme-btn:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+body.night-mode #toggle-theme-btn {
+  background: linear-gradient(to right, #555, #222);
+  color: #f0f0f0;
+}
+
+.find-out-link {
+  background: linear-gradient(to right, #182848, #4b6cb7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.find-out-link:hover {
+  background: linear-gradient(to right, #1d2b64, #5a6cbf);
+  transform: scale(1.05);
+}
+
+.find-out-link:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.night-mode .find-out-link {
+  background: linear-gradient(to right, #555, #222);
+  color: #f0f0f0;
+}
+
+#operators-explained {
+  font-size: 2vh;
+  padding: 15vh;
+}
+
+.addition-title, .substraction-title, .multiply-title, .division-title {
+  padding: 5vh;
+}
+
+
