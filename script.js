@@ -4,7 +4,6 @@ let currentOp = null;
 let waitingForSecondNum = false;
 let newEquation = true;
 
-// ===== HTML Elements =====
 const display = document.querySelector("#calc-display");
 const buttons = document.querySelectorAll("button");
 
@@ -20,7 +19,6 @@ themeToggleBtn.addEventListener('click', () => {
   }
 });
 
-// ===== Handle Calculator =====
 function updateDisplay() {
   display.textContent = displayValue;
 };
@@ -28,15 +26,12 @@ function updateDisplay() {
 function inputDigit(digit) {
 
   if (waitingForSecondNum) {
-    // starting a second number
     displayValue = digit;
     waitingForSecondNum = false;
   } else if (newEquation === true) {
-    // if we're starting a new equation:
     displayValue = digit;
     newEquation = false;
   } else {
-    // otherwise append to current display
     displayValue += digit;
   }
   updateDisplay();
@@ -54,15 +49,6 @@ function backspace() {
   displayValue = displayValue.slice(0, -1) || "0";
   updateDisplay();
 }
-
-// not using mod function in the end
-
-// function calculatePercentage() {
-//   const value = parseFloat(displayValue);
-//   displayValue = (value / 100).toString();
-//   updateDisplay();
-//   waitingForSecondNum = true;
-// }
 
 function toggleSign() {
   displayValue = (parseFloat(displayValue) * -1).toString();
@@ -85,7 +71,6 @@ function processOp(nextOp) {
     if (result === null) {
       handleDivideByZero();
       resetState();
-      // updateDisplay();
       return;
     }
 
@@ -99,7 +84,6 @@ function processOp(nextOp) {
 } 
 
 function handleDivideByZero() {
-  // If the calc gives null result, we can do what we want in a separate function.
   alert("Genius Alert! ;)");
 }
 
@@ -109,7 +93,6 @@ function handleEquals()  {
   if (currentOp !== null && firstNum !== null && waitingForSecondNum === false) {
     const result = operate(currentOp, firstNum, inputValue);
 
-    // divide by zero case
     if(result === null) {
       handleDivideByZero();
     } else {
@@ -136,13 +119,9 @@ function resetState() {
 }
 
 function formatResult(result) {
-  // toFixed rounds the number, so we don't need to convert to num then to string.
   const rounded = parseFloat(result.toFixed(4));
   return rounded.toString();
-  // return parseFloat(result).toFixed(4);
 }
-
-// ===== Operations =====
 
 function add(a, b) {
   return a + b;
@@ -178,7 +157,6 @@ function operate(currentOp, a, b) {
   }
 }
 
-// ==== Event Listener for Buttons ====
 buttons.forEach((b) => b.addEventListener("click", (event) => {
   const button = event.target;
   const buttonText = button.textContent;
@@ -202,7 +180,6 @@ buttons.forEach((b) => b.addEventListener("click", (event) => {
   }
 })); 
 
-// ==== Keyboard ====
 document.addEventListener("keydown", (event) => {
 const key = event.key;
 
