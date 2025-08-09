@@ -1,5 +1,4 @@
 :root {
-  /* variables */
   --color-primary: rgb(40, 40, 40);
   --btn-size: 75px;
 
@@ -64,7 +63,6 @@ body.night-mode {
 
 body.night-mode button {
   color: var(--color-primary);
-  /*background-color: var(--color-primary);*/
 }
 
 body.night-mode .calc-btn,
@@ -329,14 +327,12 @@ body.night-mode .find-out-link {
 
 #operators-explained {
   font-family: monospace;
-  /*background-color: #ebe7d6;*/
   padding: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 2vh;
   padding-left: 5vw;
   padding-right: 5vw;
-  /*box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 4px 4px 0 #000;*/
 }
 
 .addition,
