@@ -60,6 +60,8 @@ function processOp(nextOp) {
 
   if (currentOp && waitingForSecondNum) {
     currentOp = nextOp;
+    displayValue = nextOp;
+    updateDisplay();
     return;
   }
 
@@ -81,6 +83,9 @@ function processOp(nextOp) {
   
   currentOp = nextOp;
   waitingForSecondNum = true;
+
+  displayValue = nextOp;
+  updateDisplay();
 } 
 
 function handleDivideByZero() {
