@@ -31,6 +31,8 @@ function inputDigit(digit) {
   } else if (newEquation === true) {
     displayValue = digit;
     newEquation = false;
+  } else if (displayValue == "0" && digit == "0") {
+    return;
   } else {
     displayValue += digit;
   }
