@@ -385,3 +385,12 @@ body.night-mode .find-out-link {
   margin-bottom: 12px;
   box-shadow: 4px 4px 0 #000;
 }
+
+#calc-text.flash {
+  animation: flash 0.2s;
+}
+
+@keyframes flash {
+  from {color: rgb(40, 40, 40); }
+  to {color: #b1bcb8;}
+}
