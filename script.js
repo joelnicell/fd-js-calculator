@@ -4,7 +4,8 @@ let currentOp = null;
 let waitingForSecondNum = false;
 let newEquation = true;
 
-const display = document.querySelector("#calc-display");
+const calcText = document.querySelector("#calc-text");
+const calcOp = document.querySelector("#calc-operation");
 const buttons = document.querySelectorAll("button");
 
 const themeToggleBtn = document.getElementById('toggle-theme-btn');
@@ -20,8 +21,12 @@ themeToggleBtn.addEventListener('click', () => {
 });
 
 function updateDisplay() {
-  display.textContent = displayValue;
+  calcText.textContent = displayValue;
 };
+
+function updateOperator() {
+  calcOp.textContent = currentOp;
+}
 
 function inputDigit(digit) {
 
@@ -63,7 +68,7 @@ function processOp(nextOp) {
   if (currentOp && waitingForSecondNum) {
     currentOp = nextOp;
     displayValue = nextOp;
-    updateDisplay();
+    updateOperator();
     return;
   }
 
@@ -87,7 +92,7 @@ function processOp(nextOp) {
   waitingForSecondNum = true;
 
   displayValue = nextOp;
-  updateDisplay();
+  updateOperator();
 } 
 
 function handleDivideByZero() {
@@ -108,6 +113,7 @@ function handleEquals()  {
 
     resetState();
     updateDisplay();
+    updateOperator();
     clearFocus();
     newEquation = true;
   }
@@ -119,6 +125,7 @@ function clearCalculator() {
   displayValue = "0";
   newEquation = true;
   updateDisplay();
+  updateOperator();
 }
 
 function resetState() {
@@ -203,23 +210,23 @@ buttons.forEach((b) => b.addEventListener("click", (event) => {
 })); 
 
 document.addEventListener("keydown", (event) => {
-const key = event.key;
+  const key = event.key;
 
-if (!isNaN(key)) {
-  inputDigit(key);
-} else if (["+", "-", "*", "/"].includes(key)) {
-  processOp(key);
-} else if (key === "%") {
-  calculatePercentage();
-} else if (key === ".") {
-  inputDecimal();
-} else if (key === "Enter" || key === "=") {
-  event.preventDefault();
-  handleEquals();
-} else if (key === "Backspace") {
-  backspace();
-} else if (key.toLowerCase() === "c") {
-  clearCalculator();
-}
+  if (!isNaN(key)) {
+    inputDigit(key);
+  } else if (["+", "-", "*", "/"].includes(key)) {
+    processOp(key);
+  } else if (key === "%") {
+    calculatePercentage();
+  } else if (key === ".") {
+    inputDecimal();
+  } else if (key === "Enter" || key === "=") {
+    event.preventDefault();
+    handleEquals();
+  } else if (key === "Backspace") {
+    backspace();
+  } else if (key.toLowerCase() === "c") {
+    clearCalculator();
+  }
 });
 
