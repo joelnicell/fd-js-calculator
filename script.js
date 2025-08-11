@@ -108,12 +108,14 @@ function handleEquals()  {
 
     resetState();
     updateDisplay();
+    clearFocus();
     newEquation = true;
   }
 }
 
 function clearCalculator() {
   resetState();
+  clearFocus();
   displayValue = "0";
   newEquation = true;
   updateDisplay();
@@ -164,6 +166,17 @@ function operate(currentOp, a, b) {
   }
 }
 
+function applyFocus(b) {
+  b.classList.add("focused");
+
+}
+
+function clearFocus() {
+  buttons.forEach((b) => {
+    b.classList.remove("focused");
+  })
+}
+
 buttons.forEach((b) => b.addEventListener("click", (event) => {
   const button = event.target;
   const buttonText = button.textContent;
@@ -176,6 +189,8 @@ buttons.forEach((b) => b.addEventListener("click", (event) => {
     handleEquals();
   } else if (["+", "-", "*", "/"].includes(buttonText)) {
     processOp(buttonText);
+    clearFocus();
+    applyFocus(b);
   } else if (button.id === "mod-btn") {
     calculatePercentage();
   } else if (button.id === "sign-btn") {
