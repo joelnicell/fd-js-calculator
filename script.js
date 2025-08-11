@@ -42,6 +42,9 @@ function inputDigit(digit) {
     displayValue += digit;
   }
   updateDisplay();
+  calcText.classList.remove("flash");
+  void calcText.offsetWidth;
+  calcText.classList.add("flash");
 }  
 
 function inputDecimal () {
