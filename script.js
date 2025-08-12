@@ -3,6 +3,7 @@ let firstNum = null;
 let currentOp = null;
 let waitingForSecondNum = false;
 let newEquation = true;
+let firstDigitAfterClear = false;
 
 const calcText = document.querySelector("#calc-text");
 const calcOp = document.querySelector("#calc-operation");
@@ -33,9 +34,12 @@ function inputDigit(digit) {
   if (waitingForSecondNum) {
     displayValue = digit;
     waitingForSecondNum = false;
-  } else if (newEquation === true) {
+  } else if (newEquation === true || firstDigitAfterClear === true) {
     displayValue = digit;
     newEquation = false;
+    firstDigitAfterClear = false;
+    updateDisplay();
+    return;
   } else if (displayValue == "0" && digit == "0") {
     return;
   } else {
@@ -127,6 +131,7 @@ function clearCalculator() {
   clearFocus();
   displayValue = "0";
   newEquation = true;
+  firstDigitAfterClear = true;
   updateDisplay();
   updateOperator();
 }
@@ -232,4 +237,3 @@ document.addEventListener("keydown", (event) => {
     clearCalculator();
   }
 });
-
