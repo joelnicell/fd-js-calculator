@@ -34,11 +34,13 @@ function inputDigit(digit) {
   if (waitingForSecondNum) {
     displayValue = digit;
     waitingForSecondNum = false;
+    calcText.classList.add("flash");
   } else if (newEquation === true || firstDigitAfterClear === true) {
     displayValue = digit;
     newEquation = false;
     firstDigitAfterClear = false;
     updateDisplay();
+    calcText.classList.remove("flash");
     return;
   } else if (displayValue == "0" && digit == "0") {
     return;
@@ -46,9 +48,6 @@ function inputDigit(digit) {
     displayValue += digit;
   }
   updateDisplay();
-  calcText.classList.remove("flash");
-  void calcText.offsetWidth;
-  calcText.classList.add("flash");
 }  
 
 function inputDecimal () {
